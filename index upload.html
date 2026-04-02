@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>earnmoney</title>
+  <link rel="canonical" href="https://earnmoney/" />
+  <style>
+    :root {
+      --bg: #f6f8fc;
+      --text: #111;
+      --accent: #2563eb;
+      --surf: #fff;
+      --muted: #666;
+    }
+    [data-theme="dark"] {
+      --bg: #0c1222;
+      --text: #e5e9f0;
+      --accent: #7aa2f7;
+      --surf: #141c2e;
+      --muted: #a2adcf;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+    .container { width: min(100%, 1100px); margin: 0 auto; padding: 1.4rem; }
+    .site-header { background: var(--surf); border-bottom: 1px solid rgba(255,255,255,.15); position: sticky; top: 0; z-index: 10; }
+    .site-header .container { display: flex; align-items: center; justify-content: space-between; gap: .8rem; }
+    .site-header h1 { font-size: 1.4rem; color: var(--accent); }
+    .nav { display: flex; gap: .8rem; }
+    .theme-btn, .menu-btn { margin-left: .5rem; }
+    .theme-btn { background: var(--text); color: var(--surf); border: 0; border-radius: 6px; padding: .45rem .7rem; cursor: pointer; }
+    .nav a { text-decoration: none; color: #333; font-weight: 600; }
+    .nav a:hover { color: var(--accent); }
+    .menu-btn { display: none; background: var(--accent); color: #fff; border: 0; border-radius: 6px; padding: .45rem .7rem; cursor: pointer; }
+    section { margin-top: 1.5rem; background: var(--surf); border-radius: 10px; padding: 1.2rem; box-shadow: 0 6px 18px rgba(0,0,0,.06); }
+    .site-footer { text-align: center; padding: 1rem; font-size: 0.9rem; color: var(--muted); margin-top: 1rem; }
+    @media (max-width: 760px) {
+      .container { padding: .8rem; }
+      .nav { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: #fff; border-bottom: 1px solid #ddd; display: none; }
+      .nav.open { display: flex; }
+      .menu-btn { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>earnmoney</h1>
+      <nav id="menu" class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div>
+        <button id="themeBtn" class="theme-btn" aria-label="Toggle theme">Dark Mode</button>
+        <button id="menuBtn" class="menu-btn" aria-label="Toggle menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="home">
+      <h2>Home</h2>
+      <p>A fully functional static site, all in one file.</p>
+      <button id="greetBtn">Say Hello</button>
+      <p id="greetOutput"></p>
+    </section>
+
+    <section id="about">
+      <h2>About</h2>
+      <p>Works without a web server—just open the file in any browser.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email: kivati368@gmail.com</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 earnmoney</p>
+  </footer>
+
+  <script>
+    const themeBtn = document.getElementById("themeBtn");
+    const applyTheme = (theme) => {
+      document.documentElement.setAttribute("data-theme", theme);
+      themeBtn.textContent = theme === "dark" ? "Light Mode" : "Dark Mode";
+      localStorage.setItem("theme", theme);
+    };
+
+    const savedTheme = localStorage.getItem("theme") || "light";
+    applyTheme(savedTheme);
+
+    themeBtn.addEventListener("click", () => {
+      const current = document.documentElement.getAttribute("data-theme") || "light";
+      applyTheme(current === "dark" ? "light" : "dark");
+    });
+
+    document.getElementById("greetBtn").addEventListener("click", () => {
+      document.getElementById("greetOutput").textContent = "Hello! Your site is ready.";
+    });
+
+    document.getElementById("menuBtn").addEventListener("click", () => {
+      document.getElementById("menu").classList.toggle("open");
+    });
+  </script>
+</body>
+</html>
